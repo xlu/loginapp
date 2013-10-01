@@ -1,0 +1,103 @@
+<%
+=begin
+Author: Xiaoming Lu
+Note:
+  For review convenience, I include style and javascript in this file
+  instead of using a separate file for each.
+
+Test cases done:
+1) username: secret, password: secret
+see alert "You have successfully login"  as username and password are both
+hard coded with "secret"
+2) usename: (empty), password: abc
+see alert ("Apple ID cannot be empty")
+3) username: secret, password: (empty)
+see alert "Password cannot be empty"
+4) username: abc, password: abc
+see alert "You failed to login, please check your username and password"
+=end
+%>
+
+<script type="text/javascript">
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+
+$(document).ready(function() {
+  $('.login').click(function() {
+    var formObj = $(this).parent();
+
+    if (isBlank(formObj.find("input[name='appleid']").val())) {
+      alert("Apple ID cannot be empty");
+    }
+    else if (isBlank(formObj.find("input[name='password']").val())) {
+      alert("Password cannot be empty");
+    }
+    else {
+      $.ajax({
+        type: 'POST',
+        url: "login/create",
+        data: formObj.serialize(),
+        success: function() {
+          alert("You have successfully login");
+        },
+        error: function(data) {
+          alert("You failed to login, please check your username and password");
+        }
+      });
+    }
+  });
+});
+</script>
+
+<style type="text/css">
+.sign_in_container {
+  width: 500px;
+  background-color: #232323;
+  color: #e8e8e8;
+  font: 14px;
+  text-align: center;
+  padding: 50px;
+  align: left;
+}
+
+.row {
+ width: 300px;
+ height:                 25px;
+ padding:                10px;
+}
+
+.sign_in_title {
+  margin:                 auto;
+  text-align:             left;
+  font:                   14px arial;
+  padding-left:           0px;
+}
+
+.sign_in_container input {
+  font:                   12px arial;
+  -moz-border-radius:     2px;
+  -webkit-border-radius:  2px;
+  border-radius:          2px;
+  margin:                 10px;
+}
+
+.sign_in_container .login{
+  border-radius:      2px;
+  background-color:   #db4a39;
+  font:               12px arial;
+  color:              #e8e8e8;
+  margin:             10px auto;
+
+}
+</style>
+
+<div class="sign_in_container">
+  <%= form_tag do %>
+    <div class="sign_in_title row">User Login</div>
+    <%= text_field_tag :appleid, nil, :size => 20, :placeholder => "Apple ID", :class => "row" %>
+    <%= text_field_tag :password, nil, :size => 20, :placeholder => "Password", :class => "row" %>
+    <div class="login row"> Login to your account </div>
+  <% end %>
+</div>
+

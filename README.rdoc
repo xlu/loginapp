@@ -1,0 +1,30 @@
+== Apple Login Test
+
+Author: Xiaoming Lu
+Note:
+  - This application is written using ruby 1.9.3p286, Rails 3.2.11
+  - For review convenience, I include style and javascript in this file
+    instead of using a separate file for each.
+
+Part 1: Test cases done:
+I have executed the following test cases on this app.
+1) username: secret, password: secret
+see alert "You have successfully login"  as username and password are both
+hard coded with "secret"
+2) usename: (empty), password: abc
+see alert ("Apple ID cannot be empty")
+3) username: secret, password: (empty)
+see alert "Password cannot be empty"
+4) username: abc, password: abc
+see alert "You failed to login, please check your username and password"
+
+Part 2: Code be reviewed by Apple reviewers:
+  I did a "rails new loginapp" in console to create a default rails app. Then I
+  created/modified the following files for this app
+
+  - created: app/controller/login_controller.rb
+  - created: app/views/login.html.erb
+  - modified: routes.rb
+
+
+
