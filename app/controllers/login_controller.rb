@@ -6,7 +6,7 @@ class LoginController < ApplicationController
   def create
     puts "params=#{params.inspect}"
     # stub
-    if (params["appleid"] == "secret") && (params["password"] == "secret")
+    if (params["username"] == "secret") && (params["password"] == "secret")
       success = true
     else
       success = false
